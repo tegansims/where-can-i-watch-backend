@@ -94,10 +94,7 @@ const resolvers = {
     plotOutline: ({ plotOutline }) => plotOutline && plotOutline.text,
     plotSummary: ({ plotSummary }) => plotSummary && plotSummary.text,
     image: ({ title }) => title.image.url,
-  },
-  Name: {
-    name: ({ name }) => name,
-  },
+  } 
 };
 
 const server = new ApolloServer({ typeDefs, resolvers });
