@@ -1,6 +1,6 @@
 const { ApolloServer, gql } = require("apollo-server");
 require("dotenv").config();
-var axios = require("axios").default;
+const axios = require("axios").default;
 
 const searchHeaders = {
   "x-rapidapi-host":
@@ -48,14 +48,9 @@ const typeDefs = gql`
     image: String
   }
 
-  type Name {
-    name: String
-  }
-
   type Query {
     getMovieBySearchTerm(searchTerm: String): [Movie]
     getMovieDetails(id: String, countryCode: String): MovieDetails
-    getMyName: Name
   }
 `;
 
@@ -73,7 +68,7 @@ const resolvers = {
         console.log({ err });
       }
     },
-    getMovieDetails: async (_, { id, countryCode = "GB"}) => {
+    getMovieDetails: async (_, { id, countryCode = "GB" }) => {
       try {
         const details = await axios({
           method: "GET",
@@ -81,13 +76,6 @@ const resolvers = {
           headers: detailsHeaders,
         }).then((resp) => resp.data);
         return details;
-      } catch (err) {
-        console.log({ err });
-      }
-    },
-    getMyName: async (_) => {
-      try {
-        return { name: "tegan" };
       } catch (err) {
         console.log({ err });
       }
